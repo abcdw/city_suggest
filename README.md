@@ -23,6 +23,6 @@ Create and populate database with [django-cities-light](https://github.com/yourl
     ./manage.py syncdb
     ./manage.py cities_light
 
-Run project and enjoy:
+Run project and enjoy [http://127.0.0.1:8000/suggest](http://127.0.0.1:8000/suggest):
 
     ./manage.py runserver
