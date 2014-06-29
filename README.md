@@ -13,7 +13,7 @@ Enter project dir:
 
     cd city_suggest
     
-Execute [./run.sh](https://github.com/abcdw/city_suggest/blob/master/run.sh) or do this stuff manual:
+Execute [./install.sh](https://github.com/abcdw/city_suggest/blob/master/install.sh) && [./run.sh](https://github.com/abcdw/city_suggest/blob/master/run.sh) or do this stuff manual:
 
 Configurate virtualenv and install requirements :
 
