@@ -1,0 +1,62 @@
+<head>
+</head>
+<body>
+    <form>
+    <div class="ui-widget">
+          <label for="city">city: </label>
+          <input id="city">
+    </div>
+    <div id="res"></div>
+    <form>
+
+
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            function show_info() {
+                console.log("showing info: \n");
+                $.ajax({
+                    url: "api/get_cities/",
+                    dataType: "json",
+                    data: {
+                        filter: $("#city").val()
+                    },
+                    success: function(data) {
+                        console.log(data);
+                    }
+                });
+            };
+
+            $("#city").autocomplete({
+                source: function( request, response ) {
+                    $.ajax({
+                        url: "api/get_cities/",
+                        dataType: "json",
+                        data: {
+                            filter: request.term
+                        },
+                        success: function(data) {
+                            response($.map(data, function(city) {
+                                return {
+                                    value: city.name + ', ' + city.country
+                                };
+                            }));
+                        },
+                    });
+                },
+                select: function(event, ui) {
+                    show_info();
+                },
+                minLength: 1,
+            });
+
+            $("form").submit(function(event){
+                event.preventDefault();
+                show_info();
+            });
+        });
+    </script>
+</body>
