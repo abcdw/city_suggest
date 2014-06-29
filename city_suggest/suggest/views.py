@@ -10,14 +10,15 @@ def index(request):
 
 def get_cities(request):
     if True: #request.is_ajax():
-        q = request.GET.get('filter', '')
-        cities = City.objects.filter(name__icontains = q )[:20]
-        results = []
+        query = request.GET.get('filter', '')
+        cities = City.objects.filter(name__icontains = query )[:20]
+        result = []
         for city in cities:
             city_json = {}
-            city_json['id'] = city.name
-            results.append(city_json)
-        data = json.dumps(results)
+            city_json['name'] = city.name
+            city_json['country'] = city.country.name
+            result.append(city_json)
+        data = json.dumps(result)
     else:
         data = 'fail'
     mimetype = 'application/json'
