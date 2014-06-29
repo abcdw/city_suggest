@@ -18,7 +18,7 @@ Configurate virtualenv and install requirements:
     cd city_suggest/city_suggest
     pip install -r requirements.txt
 
-Create and populate database:
+Create and populate database with [django-cities-light](https://github.com/yourlabs/django-cities-light):
 
     ./manage.py syncdb
     ./manage.py cities_light
