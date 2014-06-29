@@ -3,10 +3,25 @@
 <body>
     <form>
     <div class="ui-widget">
-          <label for="city">city: </label>
-          <input id="city">
+        <ul>
+            <li>
+                label for="city">City: </label><br>
+                <input id="city">
+            </li>
+            <li>
+                <label for="region">Region: </label>
+                <div id="region"></div>
+            </li>
+            <li>
+                <label for="coords">Coords: </label>
+                <div id="coords"></div>
+            </li>
+            <li>
+                <label for="population">Population: </label>
+                <div id="population"></div>
+            </li>
+        </ul>
     </div>
-    <div id="res"></div>
     <form>
 
 
@@ -16,16 +31,18 @@
 
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
-            function show_info() {
-                console.log("showing info: \n");
+            function show_info(city) {
+                console.log("showing info for: " + city + "\n");
                 $.ajax({
-                    url: "api/get_cities/",
+                    url: "api/get_city_info/",
                     dataType: "json",
                     data: {
-                        filter: $("#city").val()
+                        filter: city
                     },
                     success: function(data) {
-                        console.log(data);
+                        $("#region").html(data.region)
+                        $("#coords").html(data.coords)
+                        $("#population").html(data.population)
                     }
                 });
             };
@@ -48,14 +65,14 @@
                     });
                 },
                 select: function(event, ui) {
-                    show_info();
+                    show_info(ui.item.value);
                 },
                 minLength: 1,
             });
 
             $("form").submit(function(event){
                 event.preventDefault();
-                show_info();
+                show_info($("#city").val());
             });
         });
     </script>
